@@ -1,1 +1,1 @@
-# message-lint
+# message-res-lint
