@@ -1,0 +1,83 @@
+[
+    {
+        "regexp": [
+            "([\\s]{2,})"
+        ],
+        "outputFile": "extraneous_spaces",
+        "desc": "Extraneous Spaces detected"
+    },
+    {
+        "regexp": [
+            "^(\\,)",
+            "(\\,)$",
+            "^\\s*(and|or)\b",
+            "\b(the|to|by|on|or|and)\b$",
+            "^{\\w+}$"
+        ],
+        "outputFile": "fragments",
+        "desc": "Sentence Fragments"
+    },
+    {
+        "regexp": [
+            "(the\b\\{\\w+\\})",
+            "(a\b\\{\\w+\\})",
+            "(an\b\\{\\w+\\})",
+            "(a\\(n\\)\b\\{\\w+\\})"
+        ],
+        "outputFile": "articles",
+        "desc": "definite and indefinite articles"
+    },
+    {
+        "regexp": [
+            "(\\{\\w+\\}\\s*%)"
+        ],
+        "outputFile": "percentage",
+        "desc": "percentage format"
+    },
+    {
+        "regexp": [
+            "'\\{'"
+        ],
+        "outputFile": "placeholder_quotations",
+        "desc": "Incorrect placeholder quoting."
+    },
+    {
+        "regexp": [
+            "\\{\\w+\\}\\s*(year|month|week|day|hour|min|sec|groups|issues|users|people|other|boards|spaces)"
+        ],
+        "outputFile": "plural_nouns",
+        "desc": "Plural Nouns"
+    },
+    {
+        "regexp": [
+            "(http|https)://",
+            "(<a\\s*.*>\\s*.*<\\/a>)"
+        ],
+        "outputFile": "url_uri",
+        "desc": "String Resource contains URIs/URLs"
+    },
+    {
+        "regexp": [
+            "\\{\\d+\\}",
+            "\\{\\s*\\}"
+        ],
+        "outputFile": "numbered_placeholders",
+        "desc": "String Resource contains numbered placeholders like \u2019{0}\u2019. Please use variable names in placeholders."
+    },
+    {
+        "regexp": [
+            "\\{\\s*\\d\\s*,\\s*choice.+\\}"
+        ],
+        "outputFile": "choice_formatted",
+        "desc": "Find string resources using the choice format"
+    },
+    {
+        "regexp": [
+            "\\'",
+            "\\\"",
+            "[\\.]{3}"
+        ],
+        "outputFile": "ascii_punct",
+        "desc": "ASCII punctuation in use. Best Practice is to use their Unicode equivalents."
+    }
+]
