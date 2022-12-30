@@ -1,5 +1,6 @@
 import os
 import json
+from jproperties import Properties
 
 
 class FileWriter:
@@ -61,8 +62,13 @@ class PropertiesFileWriter(FileWriter):
         super().__init__(filename)
         self.file_extension = ".properties"
 
-    def write(self, bin_name, properties):
+    def write(self, bin_name, dict_obj):
         output_filename = bin_name + self.file_extension
         output_path = os.path.join(self.folder_path, output_filename)
+
+        properties = Properties()
+        for message_id, message in dict_obj.items():
+            properties[message_id] = message
+
         with open(output_path, "wb") as f:
             properties.store(f, encoding="utf-8")
