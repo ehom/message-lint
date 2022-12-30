@@ -10,8 +10,8 @@
         "regexp": [
             "^(\\,)",
             "(\\,)$",
-            "^\\s*(and|or)\b",
-            "\b(the|to|by|on|or|and)\b$",
+            "^\\s*(and|or)\\b",
+            "\\b(the|to|by|on|or|and)\\b$",
             "^{\\w+}$"
         ],
         "outputFile": "fragments",
@@ -19,10 +19,10 @@
     },
     {
         "regexp": [
-            "(the\b\\{\\w+\\})",
-            "(a\b\\{\\w+\\})",
-            "(an\b\\{\\w+\\})",
-            "(a\\(n\\)\b\\{\\w+\\})"
+            "(the\\b\\{\\w+\\})",
+            "(a\\b\\{\\w+\\})",
+            "(an\\b\\{\\w+\\})",
+            "(a\\(n\\)\\b\\{\\w+\\})"
         ],
         "outputFile": "articles",
         "desc": "definite and indefinite articles"
@@ -36,7 +36,7 @@
     },
     {
         "regexp": [
-            "'\\{'"
+            "\\'\\{\\'"
         ],
         "outputFile": "placeholder_quotations",
         "desc": "Incorrect placeholder quoting."
@@ -62,7 +62,7 @@
             "\\{\\s*\\}"
         ],
         "outputFile": "numbered_placeholders",
-        "desc": "String Resource contains numbered placeholders like \u2019{0}\u2019. Please use variable names in placeholders."
+        "desc": "String Resource contains numbered placeholders like \u2019{0}\u2019. Please use variable names in placeholders. "
     },
     {
         "regexp": [
