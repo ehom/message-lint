@@ -8,7 +8,6 @@ from pprint import PrettyPrinter
 fpath = os.path.join(os.path.dirname(__file__), '..')
 sys.path.append(fpath)
 
-
 from utils import FileProcessor
 from utils import FileWriter
 
@@ -44,12 +43,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-'''
-https://stackoverflow.com/questions/71590785/nlp-check-if-a-detected-sentence-is-a-complete-sentence
-https://freecontent.manning.com/sentence-classification-in-nlp/
-https://www.analyticsvidhya.com/blog/2021/09/natural-language-processing-using-cnns-for-sentence-classification/
-https://www.geeksforgeeks.org/python-perform-sentence-segmentation-using-spacy/
-https://medium.com/open-source-quill/natural-language-processing-at-quill-org-b8f06bbba4c4
-'''
