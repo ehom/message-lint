@@ -1,5 +1,6 @@
 import os
 import json
+import pathlib
 from jproperties import Properties
 
 
@@ -26,11 +27,9 @@ class FileWriter:
             'json': JsonFileWriter,
             'properties': PropertiesFileWriter
         }
-
-        if filename.endswith('.json'):
-            return table['json'](filename)
-        elif filename.endswith('.properties'):
-            return table['properties'](filename)
+        file_extension = pathlib.Path(filename).suffix
+        if file_extension in table:
+            return table[file_extension](filename)
         else:
             return BadFileWriter(filename)
 
