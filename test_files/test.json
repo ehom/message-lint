@@ -1,0 +1,18 @@
+{
+  "action-buttons.page.star.error.title": {
+    "message": "We're having \"trouble\" starring this page",
+    "description": "Title of error flag shown when a user attempts to click the 'Star this page' button but the starring action fails"
+  },
+  "message.with.orphan.placeholder": {
+    "message": "{0}"
+  },
+  "message.2.with.orphan.placeholder": {
+    "message":"{placeholder}"
+  },
+  "message.3.with.indefinite.article": {
+    "message": "The {0} was not ready to be picked up"
+  },
+  "message.incomplete sentence": {
+    "message": ", only to be told a lie."
+  }
+}
