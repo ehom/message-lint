@@ -7,19 +7,9 @@ from jproperties import Properties
 class FileWriter:
     def __init__(self, filename):
         self.filename = filename
-        self.folder_path = FileWriter.build_output_folder(filename)
+        # self.folder_path = FileWriter.build_output_folder(filename)
+        self.folder_path = os.path.dirname(filename)
         print("FileWriter:", self.folder_path)
-
-    @staticmethod
-    def build_output_folder(filename) -> str:
-        folder_path = os.path.dirname(filename)
-        basename = os.path.basename(filename)
-        basename = os.path.splitext(basename)[0]
-        folder_path = os.path.join(folder_path, "output", basename)
-        exists = os.path.isdir(folder_path)
-        if not exists:
-            os.makedirs(folder_path, exist_ok=True)
-        return folder_path
 
     @staticmethod
     def get(filename):
