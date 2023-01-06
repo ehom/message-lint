@@ -6,34 +6,17 @@ import argparse
 
 from pprint import PrettyPrinter
 
-# print("os.pardir:", os.pardir)
 fpath = os.path.join(os.path.dirname(__file__), '..')
 sys.path.append(fpath)
 
-from utils import FileProcessor
-from utils import FileWriter
-
-custom_printer = PrettyPrinter(
-    indent=4,
-    width=100,
-    compact=True
-)
+import utils
 
 
 def process(filename):
-    processor = FileProcessor.get(filename)
-    bins = processor.process()
-    writer = FileWriter.get(filename)
+    reader = utils.FileReader.get(filename)
+    writer = utils.FileWriter.get(filename)
 
-    for binName, contents in bins.items():
-        print("Printing contents of bin...")
-        custom_printer.pprint(contents)
-
-        print("binName:", binName)
-        writer.write(binName, contents)
-
-    if len(bins):
-        print("bins:", bins.keys())
+    utils.FileProcessor(reader, writer).execute()
 
 
 def main():
@@ -43,6 +26,7 @@ def main():
     parser.add_argument("--dest", help="folder where the report files will be written to.",
                         required=False)
     args = parser.parse_args(args=None if sys.argv[1:] else ["--help"])
+
     print(args.files)
     print(args.dest)
 
