@@ -1,0 +1,60 @@
+#!/usr/bin/env python3
+
+import os
+import sys
+import argparse
+import pathlib
+
+fpath = os.path.join(os.path.dirname(__file__), '..')
+sys.path.append(fpath)
+
+import utils
+
+
+def build_file_path(filename, target_path, extra_folder=None) -> str:
+    """ build a file_path """
+    file_path = os.path.abspath(filename)
+    p = pathlib.Path(file_path)
+    src_path = p.parents[0]
+    filename = p.name
+    print(src_path, filename)
+
+    if target_path is None:
+        target_path = src_path
+    else:
+        target_path = os.path.abspath(target_path)
+
+    if extra_folder is not None:
+        target_path = os.path.join(target_path, extra_folder, filename)
+    print("path of target folder:", target_path)
+
+    os.makedirs(target_path, exist_ok=True)
+    file_path = os.path.join(target_path, filename)
+    print("path of target file:", file_path)
+
+    return file_path
+
+
+def main(args):
+    print(args.files)
+    print(args.dest)
+
+    for file in args.files:
+        reader = utils.FileReader.get(file)
+
+        # build file path for the output folder
+        file_path = build_file_path(file, args.dest, extra_folder="message_lint_reports")
+
+        writer = utils.FileWriter.get(file_path)
+
+        utils.FileProcessor(reader, writer).execute()
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="lint a list of message resource files")
+    parser.add_argument("--files",  type=str, nargs='+',
+                        help="list of files to be linted", required=True)
+    parser.add_argument("--dest", help="folder where the report files will be written to.",
+                        required=False)
+    arguments = parser.parse_args(args=None if sys.argv[1:] else ["--help"])
+    main(arguments)
