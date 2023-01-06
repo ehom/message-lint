@@ -1,21 +1,27 @@
-import os
-import json
-from jproperties import Properties
 from .str_lint import lint
+from pprint import PrettyPrinter
+
+pp = PrettyPrinter(
+    indent=4,
+    width=100,
+    compact=True
+)
 
 
 class FileProcessor:
-    def __init__(self, filename):
-        self.filename = filename
+    def __init__(self, reader, writer):
+        self.reader = reader
+        self.writer = writer
         self.bins = {}
         self.content = {}
 
-    def process(self) -> dict:
-        print("process {}".format(self.filename))
-
-        print("filename: ", self.filename)
-        folder_path = os.path.dirname(self.filename)
-        print("folder_path: ", folder_path)
+    def execute(self) -> dict:
+        try:
+            self.content = self.reader.read()
+            pp.pprint(self.content)
+        except FileNotFoundError:
+            print("Error: File Not Found: {}".format(self.reader.filename))
+            return {}
 
         for item in self.content.items():
             if item[1] is None or 'message' not in item[1]:
@@ -31,57 +37,16 @@ class FileProcessor:
                     if bin_name not in self.bins:
                         self.bins[bin_name] = {}
                     self.bins[bin_name][message_id] = message
+
+        for binName, contents in self.bins.items():
+            print("Printing contents of bin...")
+            pp.pprint(contents)
+
+            print("binName:", binName)
+            self.writer.write(binName, contents)
+
+        if len(self.bins):
+            print("bins:", self.bins.keys())
+
         return self.bins
 
-    @staticmethod
-    def get(filename):
-        table = {
-            'json': JsonFileProcessor,
-            'properties': PropertiesProcessor,
-        }
-
-        if filename.endswith('.json'):
-            return table['json'](filename)
-        elif filename.endswith('.properties'):
-            return table['properties'](filename)
-        else:
-            return NullFileProcessor(filename)
-
-
-class NullFileProcessor(FileProcessor):
-    def __init__(self, filename):
-        super().__init__(filename)
-
-    def process(self):
-        print("Can not process '{0}'".format(self.filename))
-
-
-class PropertiesProcessor(FileProcessor):
-    def __init__(self, filename):
-        super().__init__(filename)
-        self.content = PropertiesProcessor.convert(filename)
-
-    @staticmethod
-    def convert(filename) -> dict:
-        output = {}
-        with open(filename, "rb") as f:
-            properties = Properties()
-            properties.load(f, "utf-8")
-            for item in properties.items():
-                message_id, message = item[0], item[1][0]
-                output[message_id] = {
-                    "message": message
-                }
-        return output
-
-
-class JsonFileProcessor(FileProcessor):
-    def __init__(self, filename):
-        super().__init__(filename)
-        self.content = JsonFileProcessor.convert(filename)
-
-    @staticmethod
-    def convert(filename) -> dict:
-        with open(filename) as f:
-            content = json.load(f)
-        return content
