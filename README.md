@@ -31,6 +31,10 @@
 
 ## How to Run
 
-% `message-lint/bin/str-res-lint filename1.json filename2.properties`
+% `message-lint/bin/str-res-lint --files filename1.json filename2.properties`
+
+% `message-lint/bin/str-res-lint --files filename1.json filename2.properties --dest ..\report`
+
+% `message-lint/bin/str-res-lint --help`
 
 When you run the above command line, `message_lint` will scan each message for localizability issues.
