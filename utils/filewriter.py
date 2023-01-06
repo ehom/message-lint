@@ -24,8 +24,8 @@ class FileWriter:
     @staticmethod
     def get(filename):
         table = {
-            'json': JsonFileWriter,
-            'properties': PropertiesFileWriter
+            '.json': JsonFileWriter,
+            '.properties': PropertiesFileWriter
         }
         file_extension = pathlib.Path(filename).suffix
         if file_extension in table:
@@ -39,7 +39,7 @@ class BadFileWriter(FileWriter):
         super().__init__(filename)
 
     def write(self, bin_name, dict_obj):
-        pass
+        print("bad file writer")
 
 
 class JsonFileWriter(FileWriter):
