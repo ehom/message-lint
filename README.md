@@ -1,8 +1,7 @@
-# message-res-lint
-
+# message_lint
 
 ## Install Dependencies
-% `cd message-lint`
+% `cd message_lint`
 
 % `pip install -r requirements.txt`
 
@@ -31,10 +30,17 @@
 
 ## How to Run
 
-% `message-lint/bin/str-res-lint --files filename1.json filename2.properties`
+You can pass JSON message files and Java (message) Properties files to `message_lint`.
 
-% `message-lint/bin/str-res-lint --files filename1.json filename2.properties --dest ..\report`
+The lint reports for filename1.json will be located in the same directory.
 
-% `message-lint/bin/str-res-lint --help`
+% `message_lint/bin/message_lint --files filename1.json filename2.properties`
+
+You can also pass it an output folder where the lint reports will go.
+
+% `message-lint/bin/message_lint --files filename1.json filename2.properties --dest ..\report`
+
+% `message-lint/bin/message_lint --help`
+
 
 When you run the above command line, `message_lint` will scan each message for localizability issues.
