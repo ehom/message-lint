@@ -26,7 +26,7 @@ class FileReader:
         if file_extension in table:
             return table[file_extension](filename)
         else:
-            return NullFileWriter(filename)
+            return NullFileReader(filename)
 
 
 class JsonFileReader(FileReader):
@@ -63,7 +63,7 @@ class PropertiesFileReader(FileReader):
         return content
 
 
-class NullFileWriter(FileReader):
+class NullFileReader(FileReader):
     def __init__(self, filename):
         super().__init__(filename)
 
