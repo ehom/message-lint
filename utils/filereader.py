@@ -59,7 +59,6 @@ class PropertiesFileReader(FileReader):
                 content[message_id] = {
                     "message": message
                 }
-
         return content
 
 
