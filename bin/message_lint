@@ -37,13 +37,13 @@ def build_file_path(filename, target_path, extra_folder=None) -> str:
 
 def main(args):
     print(args.files)
-    print(args.dest)
+    print(args.output_folder)
 
     for file in args.files:
         reader = utils.FileReader.get(file)
 
         # build file path for the output folder
-        file_path = build_file_path(file, args.dest, extra_folder="message_lint_reports")
+        file_path = build_file_path(file, args.output_folder, extra_folder="message_lint_reports")
 
         writer = utils.FileWriter.get(file_path)
 
@@ -51,10 +51,21 @@ def main(args):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="lint a list of message resource files")
-    parser.add_argument("--files",  type=str, nargs='+',
-                        help="list of files to be linted", required=True)
-    parser.add_argument("--dest", help="folder where the report files will be written to.",
-                        required=False)
+    parser = argparse.ArgumentParser(
+        prog="message_lint",
+        description="lint a list of message resource files",
+        epilog="Thanks for using %(prog)s!")
+    parser.add_argument(
+        "files", nargs='+',
+        help="list of files to be linted")
+    parser.add_argument(
+        "-o", "--output_folder",
+        help="folder where the report files will be written to.",
+        required=False)
+    parser.add_argument(
+        "-v", "--version",
+        action="version",
+        version="%(prog)s 0.1.0")
+
     arguments = parser.parse_args(args=None if sys.argv[1:] else ["--help"])
     main(arguments)
