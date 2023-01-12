@@ -4,6 +4,10 @@ import os
 import sys
 import argparse
 import pathlib
+from datetime import datetime
+import time
+import logging
+from __init__ import __version__
 
 fpath = os.path.join(os.path.dirname(__file__), '..')
 sys.path.append(fpath)
@@ -25,10 +29,15 @@ def build_file_path(filename, target_path, extra_folder=None) -> str:
         target_path = os.path.abspath(target_path)
 
     if extra_folder is not None:
-        target_path = os.path.join(target_path, extra_folder, filename)
+        target_path = os.path.join(target_path, extra_folder)
     print("path of target folder:", target_path)
 
     os.makedirs(target_path, exist_ok=True)
+
+    # prefix output filename with timestamp
+    str_time = time.strftime("%Y%m%d-%H%M%S")
+    filename = str_time + "_" + filename
+
     file_path = os.path.join(target_path, filename)
     print("path of target file:", file_path)
 
@@ -36,8 +45,10 @@ def build_file_path(filename, target_path, extra_folder=None) -> str:
 
 
 def main(args):
-    print(args.files)
-    print(args.output_folder)
+    logging.basicConfig(filename='message_lint.log', level=logging.INFO)
+
+    logging.info(f"Input files: {args.files}")
+    logging.info(f"Output folder path: {args.output_folder}")
 
     for file in args.files:
         reader = utils.FileReader.get(file)
@@ -45,7 +56,13 @@ def main(args):
         # build file path for the output folder
         file_path = build_file_path(file, args.output_folder, extra_folder="message_lint_reports")
 
+        print("output file path:", file_path)
+
+        if pathlib.Path(file_path).suffix == ".properties":
+            file_path = file_path + ".json"
+
         writer = utils.FileWriter.get(file_path)
+        print("output file path:", file_path)
 
         utils.FileProcessor(reader, writer).execute()
 
@@ -65,7 +82,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "-v", "--version",
         action="version",
-        version="%(prog)s 0.1.0")
+        version="%(prog)s {version}".format(version=__version__))
 
     arguments = parser.parse_args(args=None if sys.argv[1:] else ["--help"])
     main(arguments)
