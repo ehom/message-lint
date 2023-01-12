@@ -38,7 +38,7 @@
 
 ## First, do this
 
-% `message-lint/bin/message_lint --help`
+*message_lint %* `bin/message_lint --help`
 
 ```
 usage: message_lint [-h] [-o OUTPUT_FOLDER] [-v] files [files ...]
@@ -59,20 +59,40 @@ Thanks for using message_lint!
 %
 ```
 
-## Now try your files
+## Now try out the test files
 
 You must pass JSON message files and Java (message) Properties files to `message_lint`.
 
-The lint reports for `test.json` will be located in the same directory under `message_lint_reports`
+By default, the lint reports will be generated and located in the same directory 
+as the test_files under `message_lint_reports`.
+
+The lint reports will only be generated in `.json` format.
 
 Here are some example command lines:
 
-% `message_lint/bin/message_lint test.json test.properties`
+### Example 1.1
 
-You can also pass it an output folder where the lint reports will go. The lint reports for this next command will 
-located in `output\message_lint_reports`
+When you run the following command line, `message_lint` will examine each message in `test_files\test.json` 
+and generate a report of localizability issues if any. By default, the lint reports will be generated and located in 
+the same directory as the `test_files` but in `message_lint_reports`
 
-% `message-lint/bin/message_lint test.json test.properties --output_folder ..\output`
+*message_lint %* `bin/message_lint test_files\test.json`
+
+### Example 1.2
+
+You can also pass it more than one file.
+
+*message_lint %* `bin/message_lint test_files\test.json test_files\test.properties`
+
+A lint report will be generated for each message resource file.
+
+### Example 2
+
+You can specify a custom output folder where the lint reports will go. 
+
+*message_lint %* `bin/message_lint test.json test.properties --output_folder ..\output`
+
+The lint reports for this next command will located in `output\message_lint_reports`
 
 
 ---
