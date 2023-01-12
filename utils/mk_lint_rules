@@ -11,17 +11,17 @@ rules = [
     "desc": "Extraneous Spaces detected"
   },
   {
-    "regexp": [r"^(\,)", r"(\,)$", r"^\s*(and|or)\b", r"\b(the|to|by|on|or|and)\b$", r"^{\w+}$"],
+    "regexp": [r"^(\,)", r"(\,)$", r"^\s*(and|or)\b", r"\b(the|to|by|on|or|and)\b$", r"^{\w*\}$"],
     "outputFile": "fragments",
     "desc": "Sentence Fragments"
   },
   {
-    "regexp": [r"(the\b\{\w+\})", r"(a\b\{\w+\})", r"(an\b\{\w+\})", r"(a\(n\)\b\{\w+\})"],
+    "regexp": [r"(the\s*\{\w*\})", r"(a\s*\{\w*\})", r"(an\s*\{\w*\})", r"(a\(n\)\s*\{\w*\})"],
     "outputFile": "articles",
-    "desc": "definite and indefinite articles"
+    "desc": "definite and indefinite articles before placeholders"
   },
   {
-    "regexp": [r"(\{\w+\}\s*%)"],
+    "regexp": [r"(\{\w*\}\s*%)"],
     "outputFile": "percentage",
     "desc": "percentage format"
   },
@@ -31,7 +31,8 @@ rules = [
     "desc": "Incorrect placeholder quoting."
   },
   {
-    "regexp": [r"\{\w+\}\s*(year|month|week|day|hour|min|sec|groups|issues|users|people|other|boards|spaces)"],
+    "regexp": [r"\{\w+\}\s*(year|month|week|day|hour|min|sec)",
+               r"\{\w+\}\s*(groups|issues|users|people|other|boards|spaces)"],
     "outputFile": "plural_nouns",
     "desc": "Plural Nouns"
   },
@@ -43,7 +44,7 @@ rules = [
   {
     "regexp": [r"\{\d+\}", r"\{\s*\}"],
     "outputFile": "numbered_placeholders",
-    "desc": "String Resource contains numbered placeholders like \u2019{0}\u2019. Please use variable names in "
+    "desc": "Message contains numbered placeholders like \u2019{0}\u2019. Please use variable names in "
             "placeholders. "
   },
   {

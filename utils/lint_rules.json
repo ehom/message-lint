@@ -12,24 +12,24 @@
             "(\\,)$",
             "^\\s*(and|or)\\b",
             "\\b(the|to|by|on|or|and)\\b$",
-            "^{\\w+}$"
+            "^{\\w*\\}$"
         ],
         "outputFile": "fragments",
         "desc": "Sentence Fragments"
     },
     {
         "regexp": [
-            "(the\\b\\{\\w+\\})",
-            "(a\\b\\{\\w+\\})",
-            "(an\\b\\{\\w+\\})",
-            "(a\\(n\\)\\b\\{\\w+\\})"
+            "(the\\s*\\{\\w*\\})",
+            "(a\\s*\\{\\w*\\})",
+            "(an\\s*\\{\\w*\\})",
+            "(a\\(n\\)\\s*\\{\\w*\\})"
         ],
         "outputFile": "articles",
-        "desc": "definite and indefinite articles"
+        "desc": "definite and indefinite articles before placeholders"
     },
     {
         "regexp": [
-            "(\\{\\w+\\}\\s*%)"
+            "(\\{\\w*\\}\\s*%)"
         ],
         "outputFile": "percentage",
         "desc": "percentage format"
@@ -43,7 +43,8 @@
     },
     {
         "regexp": [
-            "\\{\\w+\\}\\s*(year|month|week|day|hour|min|sec|groups|issues|users|people|other|boards|spaces)"
+            "\\{\\w+\\}\\s*(year|month|week|day|hour|min|sec)",
+            "\\{\\w+\\}\\s*(groups|issues|users|people|other|boards|spaces)"
         ],
         "outputFile": "plural_nouns",
         "desc": "Plural Nouns"
@@ -62,7 +63,7 @@
             "\\{\\s*\\}"
         ],
         "outputFile": "numbered_placeholders",
-        "desc": "String Resource contains numbered placeholders like \u2019{0}\u2019. Please use variable names in placeholders. "
+        "desc": "Message contains numbered placeholders like \u2019{0}\u2019. Please use variable names in placeholders. "
     },
     {
         "regexp": [
