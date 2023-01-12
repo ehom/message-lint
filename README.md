@@ -59,6 +59,11 @@ Thanks for using message_lint!
 %
 ```
 
+## Diagram
+
+![Alt text here](images/message_lint_diagram.svg)
+
+
 ## Now try out the test files
 
 You must pass JSON message files and Java (message) Properties files to `message_lint`.
