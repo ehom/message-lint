@@ -3,7 +3,6 @@
         "regexp": [
             "([\\s]{2,})"
         ],
-        "outputFile": "extraneous_spaces",
         "desc": "Extraneous Spaces detected"
     },
     {
@@ -14,7 +13,6 @@
             "\\b(the|to|by|on|or|and)\\b$",
             "^{\\w*\\}$"
         ],
-        "outputFile": "fragments",
         "desc": "Sentence Fragments"
     },
     {
@@ -24,21 +22,18 @@
             "(an\\s*\\{\\w*\\})",
             "(a\\(n\\)\\s*\\{\\w*\\})"
         ],
-        "outputFile": "articles",
         "desc": "definite and indefinite articles before placeholders"
     },
     {
         "regexp": [
             "(\\{\\w*\\}\\s*%)"
         ],
-        "outputFile": "percentage",
         "desc": "percentage format"
     },
     {
         "regexp": [
             "\\'\\{\\'"
         ],
-        "outputFile": "placeholder_quotations",
         "desc": "Incorrect placeholder quoting."
     },
     {
@@ -46,7 +41,6 @@
             "\\{\\w+\\}\\s*(year|month|week|day|hour|min|sec)",
             "\\{\\w+\\}\\s*(groups|issues|users|people|other|boards|spaces)"
         ],
-        "outputFile": "plural_nouns",
         "desc": "Plural Nouns"
     },
     {
@@ -54,7 +48,6 @@
             "(http|https)://",
             "(<a\\s*.*>\\s*.*<\\/a>)"
         ],
-        "outputFile": "url_uri",
         "desc": "String Resource contains URIs/URLs"
     },
     {
@@ -62,14 +55,12 @@
             "\\{\\d+\\}",
             "\\{\\s*\\}"
         ],
-        "outputFile": "numbered_placeholders",
         "desc": "Message contains numbered placeholders like \u2019{0}\u2019. Please use variable names in placeholders. "
     },
     {
         "regexp": [
             "\\{\\s*\\d\\s*,\\s*choice.+\\}"
         ],
-        "outputFile": "choice_formatted",
         "desc": "Find string resources using the choice format"
     },
     {
@@ -78,7 +69,12 @@
             "\\\"",
             "[\\.]{3}"
         ],
-        "outputFile": "ascii_punct",
         "desc": "ASCII punctuation in use. Best Practice is to use their Unicode equivalents."
+    },
+    {
+        "regexp": [
+            "\\s*"
+        ],
+        "desc": "empty string"
     }
 ]

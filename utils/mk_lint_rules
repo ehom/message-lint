@@ -7,56 +7,50 @@ import json
 rules = [
   {
     "regexp": [r"([\s]{2,})"],
-    "outputFile": "extraneous_spaces",
     "desc": "Extraneous Spaces detected"
   },
   {
     "regexp": [r"^(\,)", r"(\,)$", r"^\s*(and|or)\b", r"\b(the|to|by|on|or|and)\b$", r"^{\w*\}$"],
-    "outputFile": "fragments",
     "desc": "Sentence Fragments"
   },
   {
     "regexp": [r"(the\s*\{\w*\})", r"(a\s*\{\w*\})", r"(an\s*\{\w*\})", r"(a\(n\)\s*\{\w*\})"],
-    "outputFile": "articles",
     "desc": "definite and indefinite articles before placeholders"
   },
   {
     "regexp": [r"(\{\w*\}\s*%)"],
-    "outputFile": "percentage",
     "desc": "percentage format"
   },
   {
     "regexp": [r"\'\{\'"],
-    "outputFile": "placeholder_quotations",
     "desc": "Incorrect placeholder quoting."
   },
   {
     "regexp": [r"\{\w+\}\s*(year|month|week|day|hour|min|sec)",
                r"\{\w+\}\s*(groups|issues|users|people|other|boards|spaces)"],
-    "outputFile": "plural_nouns",
     "desc": "Plural Nouns"
   },
   {
     "regexp": [r"(http|https)://", r"(<a\s*.*>\s*.*<\/a>)"],
-    "outputFile": "url_uri",
     "desc": "String Resource contains URIs/URLs"
   },
   {
     "regexp": [r"\{\d+\}", r"\{\s*\}"],
-    "outputFile": "numbered_placeholders",
     "desc": "Message contains numbered placeholders like \u2019{0}\u2019. Please use variable names in "
             "placeholders. "
   },
   {
     "regexp": [r"\{\s*\d\s*,\s*choice.+\}"],
-    "outputFile": "choice_formatted",
     "desc": "Find string resources using the choice format"
   },
   {
     "regexp": [r"\'", r"\"", r"[\.]{3}"],
-    "outputFile": "ascii_punct",
     "desc": "ASCII punctuation in use. Best Practice is to use their Unicode equivalents."
   },
+  {
+    "regexp": [r"\s*"],
+    "desc": "empty string"
+  }
 ]
 
 
