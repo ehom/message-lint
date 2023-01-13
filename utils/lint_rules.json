@@ -73,7 +73,7 @@
     },
     {
         "regexp": [
-            "\\s*"
+            "^\\s*$"
         ],
         "desc": "empty string"
     }

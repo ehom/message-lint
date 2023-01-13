@@ -48,7 +48,7 @@ rules = [
     "desc": "ASCII punctuation in use. Best Practice is to use their Unicode equivalents."
   },
   {
-    "regexp": [r"\s*"],
+    "regexp": [r"^\s*$"],
     "desc": "empty string"
   }
 ]
