@@ -23,30 +23,37 @@ class FileProcessor:
             print("Error: File Not Found: {}".format(self.reader.filename))
             return {}
 
-        for item in self.content.items():
-            if item[1] is None or 'message' not in item[1]:
+        # lookup table that maps a message to its findings
+        findings = {}
+        for message_id, message in self.content.items():
+            if message is None:
                 continue
-            message_id, message = [item[0], item[1]['message']]
+            print("processing....message_id:", message_id)
+            print("processing....message:", message)
+
+            if type(message) is dict and message['message'] is not None:
+                message = message['message']
+            elif type(message) is not str:
+                continue
+            else:  # type(message) is str
+                pass
+
+            findings[message_id] = {
+                "message": message,
+                "linted": []
+            }
+
             print("'{0}': \"{1}\"\n".format(message_id, message))
+
             found_something = lint(message)
             if len(found_something):
                 print("found_something:", found_something)
                 print("'{0}': >>> \"{1}\"\n".format(message_id, message))
+
                 for something in found_something:
-                    bin_name = something['outputFile']
-                    if bin_name not in self.bins:
-                        self.bins[bin_name] = {}
-                    self.bins[bin_name][message_id] = message
-
-        for binName, contents in self.bins.items():
-            print("Printing contents of bin...")
-            pp.pprint(contents)
-
-            print("binName:", binName)
-            self.writer.write(binName, contents)
-
-        if len(self.bins):
-            print("bins:", self.bins.keys())
-
-        return self.bins
+                    findings[message_id]["linted"].append(something['desc'])
+                # print(self.reader.filename)
+                # pp.pprint(findings)
+                self.writer.write(findings)
+        return findings
 
