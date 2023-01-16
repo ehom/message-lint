@@ -58,12 +58,12 @@ It uses regular expression to find these issues.
 | `...` 3 periods (U+002E)                                        |                                |
 
 
-## What happens if you don't check your source content?
+## Why you should check your source content?
 
-Checking your source content for L12y issues will save you time and money if you do it early 
+Checking your source content for L12y issues will save time and money if you do it early 
 in the product development life cycle (PDLC).
 
-Localization specialist will be grateful too :smile:
+Localization specialists will be grateful too :smile:
 
 ## Getting Started
 
