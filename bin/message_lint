@@ -45,7 +45,10 @@ def build_file_path(filename, target_path, extra_folder=None) -> str:
 
 
 def main(args):
-    logging.basicConfig(filename='message_lint.log', level=logging.INFO)
+    logging.basicConfig(
+        format='%(asctime)s %(levelname)-8s %(message)s',
+        datefmt="%Y-%m-%d %H:%M:%S",
+        filename='message_lint.log', level=logging.INFO)
 
     logging.info(f"Input files: {args.files}")
     logging.info(f"Output folder path: {args.output_folder}")
