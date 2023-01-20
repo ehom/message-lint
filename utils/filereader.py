@@ -9,7 +9,7 @@ class FileReader:
         print("FileReader:", filename)
 
     def read(self) -> dict:
-        print("FileReader read")
+        # print("FileReader read")
         return {}
 
     @property
@@ -31,12 +31,12 @@ class FileReader:
 
 class JsonFileReader(FileReader):
     def __init__(self, filename):
-        print("JsonFileReader")
+        # print("JsonFileReader")
         super().__init__(filename)
-        print("JsonFileReader:", self.filename)
+        # print("JsonFileReader:", self.filename)
 
     def read(self) -> dict:
-        print("Json FileReader perform:", self._filename)
+        # print("Json FileReader perform:", self._filename)
 
         with open(self._filename) as f:
             content = json.load(f)
@@ -46,7 +46,7 @@ class JsonFileReader(FileReader):
 
 class PropertiesFileReader(FileReader):
     def __init__(self, filename):
-        print("PropertiesReader")
+        # print("PropertiesReader")
         super().__init__(filename)
 
     def read(self) -> dict:
