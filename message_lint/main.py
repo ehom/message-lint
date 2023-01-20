@@ -1,7 +1,6 @@
 import os
 import sys
 import pathlib
-from datetime import datetime
 import time
 import logging
 
@@ -17,7 +16,8 @@ def build_file_path(filename, target_path, extra_folder=None) -> str:
     p = pathlib.Path(file_path)
     src_path = p.parents[0]
     filename = p.name
-    print(src_path, filename)
+
+    # print(src_path, filename)
 
     if target_path is None:
         target_path = src_path
@@ -26,7 +26,8 @@ def build_file_path(filename, target_path, extra_folder=None) -> str:
 
     if extra_folder is not None:
         target_path = os.path.join(target_path, extra_folder)
-    print("path of target folder:", target_path)
+
+    # print("path of target folder:", target_path)
 
     os.makedirs(target_path, exist_ok=True)
 
@@ -35,7 +36,8 @@ def build_file_path(filename, target_path, extra_folder=None) -> str:
     filename = str_time + "_" + filename
 
     file_path = os.path.join(target_path, filename)
-    print("path of target file:", file_path)
+
+    # print("path of target file:", file_path)
 
     return file_path
 
@@ -55,12 +57,13 @@ def main(args):
         # build file path for the output folder
         file_path = build_file_path(file, args.output_folder, extra_folder="message_lint_reports")
 
-        print("output file path:", file_path)
+        # print("output file path:", file_path)
 
         if pathlib.Path(file_path).suffix == ".properties":
             file_path = file_path + ".json"
 
+        print("The output will be written here:", file_path)
+
         writer = utils.FileWriter.get(file_path)
-        print("output file path:", file_path)
 
         utils.FileProcessor(reader, writer).execute()
