@@ -28,34 +28,34 @@ This command line tool can read in:
 
 ## How does `message_lint` to find these issues?
 
-It uses regular expression to find these issues.
+It uses regular expressions (regex) to find these issues.
 
-| `message_lint` checks each message if it...                     | L12y Issues                         |
-|-----------------------------------------------------------------|-------------------------------------|
-| begins with `,` or `.`                                          | Text Fragments                      |
-| begins with one of the following: `and` `or`                    |                                     |
-| ends with `,`                                                   |                                     |
-| ends with one of the following: `the` `to` `by` `on` `and` `or` |                                     |
-|                                                                 |                                     |
-| contains `{placeholder}` preceded by                            | Articles before placeholders        |   
-| `a` `an` `a(n)` or `the`                                        |                                     |
-|                                                                 |                                     |
-| contains `{placeholder}%` `{0}%`                                | Percentage Formatting               |
-|                                                                 |                                     |
-| contains one of the following: `http://` `https://`             | URIs/URLs embedded in messages      | 
-| `<a href="...">...</a>`                                         |                                     |
-|                                                                 |                                     |
-| contains `{placeholder}` followed by:                           | Inadequate support for plural nouns |
-| `year` `month` `week` `day`                                     |                                     |
-| `hour` `min` `sec`                                              |                                     |
-| `groups` `issues` `users` `people` `other` `boards` `spaces`    |                                     |
-|                                                                 |                                     |
-| contains placeholder that uses a number `{[0-9]+}`              | Non-named placeholders              | 
-|                                                                 |                                     |
-| contains any of following:                                      | use of ASCII Punctuation Chars      |
-| `'` apostrophe (U+0027)                                         |                                     |
-| `"` double quote (U+0022)                                       |                                     | 
-| `...` 3 periods (U+002E)                                        |                                     |
+| `message_lint` checks each message if it...                     | L12y Issues                                  |
+|-----------------------------------------------------------------|----------------------------------------------|
+| begins with `,` or `.`                                          | Text Fragments                               |
+| begins with one of the following: `and` `or`                    |                                              |
+| ends with `,`                                                   |                                              |
+| ends with one of the following: `the` `to` `by` `on` `and` `or` |                                              |
+|                                                                 |                                              |
+| contains `{placeholder}` preceded by                            | Articles before placeholders                 |   
+| `a` `an` `a(n)` or `the`                                        |                                              |
+|                                                                 |                                              |
+| contains `{placeholder}%` `{0}%`                                | Percentage Formatting                        |
+|                                                                 |                                              |
+| contains one of the following: `http://` `https://`             | URIs/URLs embedded in messages               | 
+| `<a href="...">...</a>`                                         |                                              |
+|                                                                 |                                              |
+| contains `{placeholder}` followed by:                           | Inadequate support for multiple plural nouns |
+| `year` `month` `week` `day`                                     |                                              |
+| `hour` `min` `sec`                                              |                                              |
+| `groups` `issues` `users` `people` `other` `boards` `spaces`    |                                              |
+|                                                                 |                                              |
+| contains placeholder that uses a number `{[0-9]+}`              | Non-named placeholders                       | 
+|                                                                 |                                              |
+| contains any of following:                                      | use of ASCII Punctuation Chars               |
+| `'` apostrophe (U+0027)                                         |                                              |
+| `"` double quote (U+0022)                                       |                                              | 
+| `...` 3 periods (U+002E)                                        |                                              |
 
 
 ## Why you should check your source content?
