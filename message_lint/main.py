@@ -8,6 +8,7 @@ fpath = os.path.join(os.path.dirname(__file__), '..')
 sys.path.append(fpath)
 
 import utils
+from .fileprocessor import FileProcessor
 
 
 def build_file_path(filename, target_path, extra_folder=None) -> str:
@@ -66,4 +67,4 @@ def main(args):
 
         writer = utils.FileWriter.get(file_path)
 
-        utils.FileProcessor(reader, writer).execute()
+        FileProcessor(reader, writer).execute()
