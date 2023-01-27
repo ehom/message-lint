@@ -1,4 +1,4 @@
-from .str_lint import lint
+from utils.str_lint import lint
 from pprint import PrettyPrinter
 import logging
 
@@ -13,7 +13,6 @@ class FileProcessor:
     def __init__(self, reader, writer):
         self.reader = reader
         self.writer = writer
-        self.bins = {}
         self.content = {}
 
     def execute(self) -> dict:
@@ -45,6 +44,7 @@ class FileProcessor:
             }
 
             found_something = lint(message)
+
             if len(found_something):
                 print(">>> '{0}': \"{1}\"".format(message_id, message))
                 for something in found_something:
