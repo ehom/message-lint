@@ -1,4 +1,4 @@
-from utils.str_lint import lint
+from .linter import lint
 from pprint import PrettyPrinter
 import logging
 
