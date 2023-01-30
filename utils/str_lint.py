@@ -2,7 +2,7 @@ import re
 from .lint_rules import rules
 
 
-def lint(text) -> list:
+def lint(text: str) -> list:
     result = []
     for entry in rules:
         pattern = '|'.join(entry['regexp'])
