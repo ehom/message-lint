@@ -2,7 +2,7 @@ import os
 import sys
 import pathlib
 import time
-import logging
+from .logger import Logger
 
 fpath = os.path.join(os.path.dirname(__file__), '..')
 sys.path.append(fpath)
@@ -44,13 +44,12 @@ def build_file_path(filename, target_path, extra_folder=None) -> str:
 
 
 def main(args):
-    logging.basicConfig(
-        format='%(asctime)s %(levelname)-8s %(message)s',
-        datefmt="%Y-%m-%d %H:%M:%S",
-        filename='message_lint.log', level=logging.INFO)
+    startup_logger = Logger().get(verbose=True)
+    startup_logger.log_info(f"Input files: {args.files}")
+    startup_logger.log_info(f"Output folder path: {args.output_folder}")
+    startup_logger.log_info(f"Verbose: {args.verbose}")
 
-    logging.info(f"Input files: {args.files}")
-    logging.info(f"Output folder path: {args.output_folder}")
+    logger = Logger().get(verbose=args.verbose)
 
     for file in args.files:
         reader = utils.FileReader.get(file)
@@ -63,8 +62,10 @@ def main(args):
         if pathlib.Path(file_path).suffix == ".properties":
             file_path = file_path + ".json"
 
-        print("The output will be written here:", file_path)
+        print(f"The lint report for file \"{file}\" will be saved here: {file_path}")
 
         writer = utils.FileWriter.get(file_path)
 
-        FileProcessor(reader, writer).execute()
+        FileProcessor(reader, writer, logger).execute()
+
+        print(f"The lint report for file \"{file}\" has been saved here: {file_path}")

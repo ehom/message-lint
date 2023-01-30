@@ -1,6 +1,5 @@
 from .linter import lint
 from pprint import PrettyPrinter
-import logging
 
 pp = PrettyPrinter(
     indent=2,
@@ -10,9 +9,10 @@ pp = PrettyPrinter(
 
 
 class FileProcessor:
-    def __init__(self, reader, writer):
+    def __init__(self, reader, writer, logger):
         self.reader = reader
         self.writer = writer
+        self.logger = logger
         self.content = {}
 
     def execute(self) -> dict:
@@ -29,7 +29,7 @@ class FileProcessor:
             if message is None:
                 continue
 
-            logging.info("Processing...\"{0}\": \"{1}\"".format(message_id, message))
+            self.logger.log_info("Processing...\"{0}\": \"{1}\"".format(message_id, message))
 
             if type(message) is dict and message['message'] is not None:
                 message = message['message']
