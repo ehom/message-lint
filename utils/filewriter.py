@@ -34,29 +34,21 @@ class BadFileWriter(FileWriter):
 class JsonFileWriter(FileWriter):
     def __init__(self, filename):
         super().__init__(filename)
-        self.file_extension = ".json"
 
-    def write(self, bin_name, dict_obj):
-        output_filename = bin_name + self.file_extension
-        output_path = os.path.join(self.folder_path, output_filename)
-
+    def write(self, dict_obj):
         json_obj_str = json.dumps(dict_obj, indent=4)
-        with open(output_path, 'w') as outputHandle:
+        with open(self.filename, 'w') as outputHandle:
             outputHandle.write(json_obj_str)
 
 
 class PropertiesFileWriter(FileWriter):
     def __init__(self, filename):
         super().__init__(filename)
-        self.file_extension = ".properties"
 
-    def write(self, bin_name, dict_obj):
-        output_filename = bin_name + self.file_extension
-        output_path = os.path.join(self.folder_path, output_filename)
-
+    def write(self, dict_obj):
         properties = Properties()
         for message_id, message in dict_obj.items():
-            properties[message_id] = message
+            properties[message_id] = message['message']
 
-        with open(output_path, "wb") as f:
+        with open(self.filename, "wb") as f:
             properties.store(f, encoding="utf-8")
