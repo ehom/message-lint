@@ -26,9 +26,9 @@ This command line tool can read in:
 |                                                                                                                                      | replace double quotation with Unicode Left and Right Double Quotation (U+201C, U+201D )                |
 |                                                                                                                                      | replace ellipses "..." with Unicode Ellipses (U+2026)                                                  |
 
-## How does `message_lint` to find these issues?
+## How does it find these issues?
 
-It uses regular expressions (regex) to find these issues.
+`message_lint` uses regular expressions (regex) to find these issues.
 
 | `message_lint` checks each message if it...                     | L12y Issues                                  |
 |-----------------------------------------------------------------|----------------------------------------------|
