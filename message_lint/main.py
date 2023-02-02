@@ -11,36 +11,36 @@ import utils
 from .fileprocessor import FileProcessor
 
 
-def build_file_path(filename, target_path, extra_folder=None) -> str:
-    """ build a file_path """
-    file_path = os.path.abspath(filename)
-    p = pathlib.Path(file_path)
-    src_path = p.parents[0]
-    filename = p.name
+def derive_output_target(filename, target_path) -> dict:
+    def get_filename_info(fname: str) -> dict:
+        abspath = os.path.abspath(fname)
+        p = pathlib.Path(abspath)
 
-    # print(src_path, filename)
+        return {
+            "abspath_folder": p.parents[0],
+            "filename":  p.name
+        }
 
-    if target_path is None:
-        target_path = src_path
+    info = get_filename_info(filename)
+
+    if target_path:
+        folder_path = os.path.abspath(target_path)
     else:
-        target_path = os.path.abspath(target_path)
+        folder_path = info['abspath_folder']
+    folder_path = os.path.join(folder_path, "message_lint_reports")
 
-    if extra_folder is not None:
-        target_path = os.path.join(target_path, extra_folder)
-
-    # print("path of target folder:", target_path)
-
-    os.makedirs(target_path, exist_ok=True)
-
-    # prefix output filename with timestamp
     str_time = time.strftime("%Y%m%d-%H%M%S")
-    filename = str_time + "_" + filename
+    filename = str_time + "_" + info['filename']
 
-    file_path = os.path.join(target_path, filename)
+    file_path = os.path.join(folder_path, filename)
 
-    # print("path of target file:", file_path)
+    if pathlib.Path(file_path).suffix == ".properties":
+        file_path = file_path + ".json"
 
-    return file_path
+    return {
+        "folder_path": folder_path,
+        "file_path": file_path
+    }
 
 
 def main(args):
@@ -55,17 +55,12 @@ def main(args):
         reader = utils.FileReader.get(file)
 
         # build file path for the output folder
-        file_path = build_file_path(file, args.output_folder, extra_folder="message_lint_reports")
+        output_target: dict = derive_output_target(file, args.output_folder)
 
-        # print("output file path:", file_path)
+        print(f"The lint report for file \"{file}\" will be saved here: {output_target['file_path']}")
 
-        if pathlib.Path(file_path).suffix == ".properties":
-            file_path = file_path + ".json"
+        writer = utils.FileWriter.get(output_target["file_path"])
 
-        print(f"The lint report for file \"{file}\" will be saved here: {file_path}")
+        FileProcessor(reader, writer, output_target, logger).execute()
 
-        writer = utils.FileWriter.get(file_path)
-
-        FileProcessor(reader, writer, logger).execute()
-
-        print(f"The lint report for file \"{file}\" has been saved here: {file_path}")
+        print(f"The lint report for file \"{file}\" has been saved here: {output_target['file_path']}")
