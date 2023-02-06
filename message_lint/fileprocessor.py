@@ -20,13 +20,12 @@ class FileProcessor:
     def execute(self) -> dict:
         try:
             self.content = self.reader.read()
-            # pp.pprint(self.content)
         except FileNotFoundError:
             print("Error: File Not Found: {0}".format(self.reader.filename))
             return {}
 
         # lookup-table that maps a message to its findings
-        findings = {}
+        findings = dict()
         for message_id, message in self.content.items():
             if message is None:
                 continue
@@ -40,10 +39,7 @@ class FileProcessor:
             else:  # type(message) is str
                 pass
 
-            findings[message_id] = {
-                "message": message,
-                "linted": []
-            }
+            findings[message_id] = dict(message=message, linted=[])
 
             found_something = lint(message)
 
