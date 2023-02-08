@@ -29,6 +29,6 @@ def main(args):
 
         writer = utils.FileWriter.get(output_target["file_path"])
 
-        FileProcessor(reader, writer, output_target, logger).execute
+        FileProcessor(reader, writer, output_target, logger).execute()
 
         print(f"The lint report for file \"{file}\" has been saved here: {output_target['file_path']}")
