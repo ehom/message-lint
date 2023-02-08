@@ -1,4 +1,5 @@
 import os
+
 from .linter import lint
 from pprint import PrettyPrinter
 
@@ -26,6 +27,7 @@ class FileProcessor:
 
         # lookup-table that maps a message to its findings
         findings = dict()
+
         for message_id, message in self.content.items():
             if message is None:
                 continue
@@ -54,4 +56,3 @@ class FileProcessor:
             os.makedirs(self.output_target['folder_path'], exist_ok=True)
             self.writer.write(findings)
         return findings
-
