@@ -1,3 +1,5 @@
+import os
+
 from .linter import lint
 from pprint import PrettyPrinter
 
@@ -9,22 +11,23 @@ pp = PrettyPrinter(
 
 
 class FileProcessor:
-    def __init__(self, reader, writer, logger):
+    def __init__(self, reader, writer, output_target, logger):
         self.reader = reader
         self.writer = writer
         self.logger = logger
+        self.output_target = output_target
         self.content = {}
 
     def execute(self) -> dict:
         try:
             self.content = self.reader.read()
-            # pp.pprint(self.content)
         except FileNotFoundError:
             print("Error: File Not Found: {0}".format(self.reader.filename))
             return {}
 
         # lookup-table that maps a message to its findings
-        findings = {}
+        findings = dict()
+
         for message_id, message in self.content.items():
             if message is None:
                 continue
@@ -38,10 +41,7 @@ class FileProcessor:
             else:  # type(message) is str
                 pass
 
-            findings[message_id] = {
-                "message": message,
-                "linted": []
-            }
+            findings[message_id] = dict(message=message, linted=[])
 
             found_something = lint(message)
 
@@ -51,6 +51,8 @@ class FileProcessor:
                     findings[message_id]["linted"].append(something['desc'])
                     print(">>> {0}".format(something['desc']))
                 print('~' * 10)
-                self.writer.write(findings)
-        return findings
 
+        if len(findings):
+            os.makedirs(self.output_target['folder_path'], exist_ok=True)
+            self.writer.write(findings)
+        return findings
