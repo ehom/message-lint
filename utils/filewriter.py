@@ -7,8 +7,6 @@ from jproperties import Properties
 class FileWriter:
     def __init__(self, filename):
         self.filename = filename
-        self.folder_path = os.path.dirname(filename)
-        print("FileWriter:", self.folder_path)
 
     @staticmethod
     def get(filename):
@@ -28,7 +26,7 @@ class BadFileWriter(FileWriter):
         super().__init__(filename)
 
     def write(self, bin_name, dict_obj):
-        print("bad file writer")
+        pass
 
 
 class JsonFileWriter(FileWriter):
