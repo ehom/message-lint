@@ -6,16 +6,21 @@
   "message.with.ascii.ellipses": {
     "message": "Hmm..."
   },
-  "message.incomplete.sentence.1": {
+  "message.beginning.with.comma": {
     "message": ", only to be told a lie."
   },
-  "message.incomplete.sentence.2": {
+  "message.beginning.with.period": {
     "message": ". After that,"
+  },
+  "message.ending.with.comma": {
+    "message": "According to experts,"
   },
   "message.incomplete.sentence.3": {
     "message": "Login and"
   },
   "message.incomplete.sentence.ending.with.or": "Send them an email or",
+  "message.incomplete.sentence.ending.with.and": "Send them an email and",
+  "message.incomplete.sentence.ending.with.but": "You can notify support but",
   "message.incomplete.sentence.beginning.with.or": "or contact support",
   "message.incomplete.sentence.beginning.with.and": "and contact support",
   "message.with.plural.1": {
@@ -61,6 +66,9 @@
   },
   "message.with.url.2": {
     "message": "Please visit our website: https://www.msn.com"
+  },
+   "message.with.url.3": {
+    "message": "Please visit our <a href={0}>website</a>"
   },
   "message.with.percentage.1": {
     "message": "The projections are not {value}% accurate."
