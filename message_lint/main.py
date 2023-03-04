@@ -25,10 +25,14 @@ def main(args):
         # build file path for the output folder
         output_target: dict = customize_output_target(file, args.output_folder)
 
-        print(f"The lint report for file \"{file}\" will be saved here: {output_target['file_path']}")
+        print(
+            f"The lint report for file \"{file}\" will be saved here: "
+            f"{output_target['file_path']}")
 
         writer = utils.FileWriter.get(output_target["file_path"])
 
         FileProcessor(reader, writer, output_target, logger).execute()
 
-        print(f"The lint report for file \"{file}\" has been saved here: {output_target['file_path']}")
+        print(
+            f"The lint report for file \"{file}\" has been saved here: "
+            f"{output_target['file_path']}")
