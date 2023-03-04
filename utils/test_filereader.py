@@ -1,5 +1,5 @@
 import unittest
-import filereader as fr
+import utils.filereader as fr
 
 
 class FileReaderTest(unittest.TestCase):
