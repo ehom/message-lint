@@ -6,28 +6,28 @@ import json
 
 rules = [
   {
-    "regexp": [r"([\s]{2,})"],
+    "regexp": [r"\s{2,}"],
     "desc": "Extraneous Spaces detected"
   },
   {
-    "regexp": [r"^(\,)", r"(\,)$", r"^\s*(and|or)\b", r"\b(the|to|by|on|or|and)\b$", r"^{\w*\}$"],
+    "regexp": [r"^\s*[\,\.]", r"[\,]\s*$", r"^\s*(and|or)\b", r"\b(the|to|by|on|or|and|but)\b$", r"^[{]\w*[}]$"],
     "desc": "Sentence Fragments"
   },
   {
-    "regexp": [r"(the\s*\{\w*\})", r"(a\s*\{\w*\})", r"(an\s*\{\w*\})", r"(a\(n\)\s*\{\w*\})"],
+    "regexp": [r"(the\s*[{]\w*[}])", r"(a\s*[{]\w*[}])", r"(an\s*[{]\w*[}])", r"(a\(n\)\s*[{]\w*[}])"],
     "desc": "definite and indefinite articles before placeholders"
   },
   {
-    "regexp": [r"(\{\w*\}\s*%)"],
+    "regexp": [r"[{]\w*[}]\s*%"],
     "desc": "percentage format"
   },
   {
-    "regexp": [r"\'\{\'"],
+    "regexp": [r"\'[{]\'"],
     "desc": "Incorrect placeholder quoting."
   },
   {
-    "regexp": [r"\{\w+\}\s*(year|month|week|day|hour|min|sec)",
-               r"\{\w+\}\s*(groups|issues|users|people|other|boards|spaces)"],
+    "regexp": [r"[{]\w+[}]\s*(year|month|week|day|hour|min|sec)",
+               r"[{]\w+[}]\s*(groups|issues|users|people|other|boards|spaces)"],
     "desc": "Plural Nouns"
   },
   {
@@ -35,12 +35,12 @@ rules = [
     "desc": "String Resource contains URIs/URLs"
   },
   {
-    "regexp": [r"\{\d+\}", r"\{\s*\}"],
+    "regexp": [r"(?<!href=)([{]\d*[}])"],
     "desc": "Message contains numbered placeholders like \u2019{0}\u2019. Please use variable names in "
             "placeholders. "
   },
   {
-    "regexp": [r"\{\s*\d\s*,\s*choice.+\}"],
+    "regexp": [r"[{]\s*\d\s*,\s*choice.+[}]"],
     "desc": "Find string resources using the choice format"
   },
   {
