@@ -1,5 +1,5 @@
 import unittest
-import filewriter as fw
+import utils.filewriter as fw
 
 
 class FileWriterTest(unittest.TestCase):

@@ -132,6 +132,3 @@ You can specify a custom output folder where the lint reports will go.
 *message_lint %* `bin/message_lint test.json test.properties --output_folder ..\output`
 
 The lint reports for this next command will located in `output\message_lint_reports`
-
-
----

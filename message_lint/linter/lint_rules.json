@@ -1,45 +1,45 @@
 [
     {
         "regexp": [
-            "([\\s]{2,})"
+            "\\s{2,}"
         ],
         "desc": "Extraneous Spaces detected"
     },
     {
         "regexp": [
-            "^(\\,)",
-            "(\\,)$",
+            "^\\s*[\\,\\.]",
+            "[\\,]\\s*$",
             "^\\s*(and|or)\\b",
-            "\\b(the|to|by|on|or|and)\\b$",
-            "^{\\w*\\}$"
+            "\\b(the|to|by|on|or|and|but)\\b$",
+            "^[{]\\w*[}]$"
         ],
         "desc": "Sentence Fragments"
     },
     {
         "regexp": [
-            "(the\\s*\\{\\w*\\})",
-            "(a\\s*\\{\\w*\\})",
-            "(an\\s*\\{\\w*\\})",
-            "(a\\(n\\)\\s*\\{\\w*\\})"
+            "(the\\s*[{]\\w*[}])",
+            "(a\\s*[{]\\w*[}])",
+            "(an\\s*[{]\\w*[}])",
+            "(a\\(n\\)\\s*[{]\\w*[}])"
         ],
         "desc": "definite and indefinite articles before placeholders"
     },
     {
         "regexp": [
-            "(\\{\\w*\\}\\s*%)"
+            "[{]\\w*[}]\\s*%"
         ],
         "desc": "percentage format"
     },
     {
         "regexp": [
-            "\\'\\{\\'"
+            "\\'[{]\\'"
         ],
         "desc": "Incorrect placeholder quoting."
     },
     {
         "regexp": [
-            "\\{\\w+\\}\\s*(year|month|week|day|hour|min|sec)",
-            "\\{\\w+\\}\\s*(groups|issues|users|people|other|boards|spaces)"
+            "[{]\\w+[}]\\s*(year|month|week|day|hour|min|sec)",
+            "[{]\\w+[}]\\s*(groups|issues|users|people|other|boards|spaces)"
         ],
         "desc": "Plural Nouns"
     },
@@ -52,14 +52,13 @@
     },
     {
         "regexp": [
-            "\\{\\d+\\}",
-            "\\{\\s*\\}"
+            "(?<!href=)([{]\\d*[}])"
         ],
         "desc": "Message contains numbered placeholders like \u2019{0}\u2019. Please use variable names in placeholders. "
     },
     {
         "regexp": [
-            "\\{\\s*\\d\\s*,\\s*choice.+\\}"
+            "[{]\\s*\\d\\s*,\\s*choice.+[}]"
         ],
         "desc": "Find string resources using the choice format"
     },
